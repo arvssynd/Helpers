@@ -21,6 +21,23 @@ namespace Helpers
                 }
             }
         }
+
+        public void ReadCSV()
+        {
+            var dedaList = new List<string>();
+            using (StreamReader sw = File.OpenText("testutenti.csv"))
+            {
+                string data = sw.ReadLine();
+                while ((data = sw.ReadLine()) != null)
+                {
+                    if (data.Contains("@"))
+                    {
+                        var dataArray = data.Split(';');
+                        dedaList.Add(dataArray[1]);
+                    }
+                }
+            }
+        }
     }
 
     public class User
