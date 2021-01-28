@@ -38,6 +38,12 @@ namespace Helpers
                 }
             }
         }
+
+        public void GenerateExcelFileStream()
+        {
+            List<User> usr = new List<User>();
+            var fs = OpenXmlExcelGenerator.GenerateExcel(usr);
+        }
     }
 
     public class User
