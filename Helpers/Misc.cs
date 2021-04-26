@@ -151,5 +151,16 @@ namespace Helpers
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToUniversalTime();
             return dtDateTime;
         }
+
+        public static void RegexChangeFormat()
+        {
+            // cambio formato del regex, col mese non funziona benissimo, meglio con diverse formati numerici di data
+
+            string input = "adsfasdfsdf 25 novembre 2010 adsfadfssafasdf ";
+
+            Regex.Replace(input,
+                       @"\b(?<day>\d{1,2})( )(?<month>:gen(?:naio)?|feb(?:braio)?|mar(?:zo)?|apr(?:ile)?|maggio|giu(?:gno)?|lug(?:lio)?|ago(?:sto)?|set(?:tembre)?|ott(?:obre)?|(nov|dic)(?:embre)?)( )(?<year>\d{2,4})\b",
+                      "${day}-${month}-${year}", RegexOptions.None);
+        }
     }
 }
