@@ -6,8 +6,13 @@ using System.Text.RegularExpressions;
 
 namespace Helpers
 {
-    class Misc
+    public class Misc
     {
+        public Misc()
+        {
+
+        }
+
         public static byte[] StringToByteArray(string hex)
         {
             int NumberChars = hex.Length;
@@ -162,5 +167,26 @@ namespace Helpers
                        @"\b(?<day>\d{1,2})( )(?<month>:gen(?:naio)?|feb(?:braio)?|mar(?:zo)?|apr(?:ile)?|maggio|giu(?:gno)?|lug(?:lio)?|ago(?:sto)?|set(?:tembre)?|ott(?:obre)?|(nov|dic)(?:embre)?)( )(?<year>\d{2,4})\b",
                       "${day}-${month}-${year}", RegexOptions.None);
         }
+
+        public int ElapsedWorkingHours()
+        {
+            var start = new DateTime(2021, 04, 28, 16, 30, 12);
+            var end = new DateTime(2021, 04, 29, 10, 25, 0);
+            int count = 0;
+
+            for (var i = start; i < end; i = i.AddMinutes(1))
+            {
+                if (i.DayOfWeek != DayOfWeek.Saturday && i.DayOfWeek != DayOfWeek.Sunday)
+                {
+                    if (i.TimeOfDay.Hours >= 8 && i.TimeOfDay.Hours < 17)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
+        }
+
     }
 }
