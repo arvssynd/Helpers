@@ -188,5 +188,28 @@ namespace Helpers
             return count;
         }
 
+        public void ValidateMacAddress(string macAddress)
+        {
+            // validazione mac address 48 bit
+            string pattern = string.Empty;
+            if (macAddress.Length == 12)
+            {
+                pattern = @"^[0-9a-fA-F]{12}$";
+                Regex rg = new(pattern);
+                if (!rg.Match(macAddress).Success)
+                {
+                    //AddError(new BaseValidatorTranslation(ValidatorMessageType.EmptyValidationError, "system.error.invalidmacaddress"));
+                }
+            }
+            else
+            {
+                pattern = @"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})|([0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4})$";
+                Regex rg = new(pattern);
+                if (!rg.Match(macAddress).Success)
+                {
+                    //AddError(new BaseValidatorTranslation(ValidatorMessageType.EmptyValidationError, "system.error.invalidmacaddress"));
+                }
+            }
+        }
     }
 }
